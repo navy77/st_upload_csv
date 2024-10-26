@@ -56,13 +56,15 @@ def main():
                 df_split[0] = df_split[0].str.strip()
                 df_split[1] = df_split[1].str.strip()
                 data_dict = dict(zip(df_split[0], df_split[1]))
-
+        
                 data_dict["die"] = str(die)
                 data_dict["bash"] = str(bash)
                 data_dict["lot"] = str(lot)
                 data_dict["cav"] = str(cav)
+                data_dict["distance"] = str(df.iloc[0,1])
 
                 json_data = json.dumps(data_dict, indent=4)
+
                 client.publish(mqtt_topic, json_data)
                 st.success('Send data finished !', icon="✅")
             except Exception as e:
